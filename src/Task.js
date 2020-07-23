@@ -1,20 +1,26 @@
-import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import React from 'react';
+import { useDispatch } from "react-redux";
 
-class Task extends Component{
-    render(){
+function Task(props){
+    const dispatch = useDispatch();
+    const style = {color:'blue'};
+    const handleclick = (e)=>{
+        e.target.style.color = e.target.style.color ==='blue'?'green':'blue';
+        //style.color = style.color ==='blue'?'red':'blue';
+    }
         return(
             <div>
-                <h4 style={{color:'blue'}}>{this.props.task.task}</h4>
+                <h4 style={style} onClick={handleclick}>{props.task.task}</h4>
+                <p>{props.number}</p>
+                <p>{props.pass}</p>
                 <button
-                onClick={()=>this.props.dispatch({type:'EDIT_TASK', id:this.props.task.id})}>
+                onClick={()=>dispatch({type:'EDIT_TASK', id:props.task.id})}>
                 Edit</button>
                 <button
-                onClick={()=>this.props.dispatch({type:'DELETE_TASK',id:this.props.task.id})}
+                onClick={()=>dispatch({type:'DELETE_TASK',id:props.task.id})}
                 >Delete</button>
             </div>
         );
-    }
 }
 
-export default connect()(Task);
+export default Task;

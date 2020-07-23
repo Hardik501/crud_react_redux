@@ -13,7 +13,9 @@ const taskReducer = (state=[], action)=>{
                     return{
                         ...task,
                         editing:!task.editing,
-                        task:action.data.newtask
+                        task:action.data.newtask,
+                        number:action.data.number,
+                        pass:action.data.pass
                     }
                 }else return task;
             })
