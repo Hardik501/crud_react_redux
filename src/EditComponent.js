@@ -1,25 +1,28 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from "react-redux";
 
-class EditComponent extends Component{
-    handleEdit = (e)=>{
+function EditComponent(props){
+    const [newtask, setTask] = useState('Add task');
+    const dispatch = useDispatch();
+    const handletaskInput = (e) =>{
+        console.log(e.target.value)
+        setTask(e.target.value)
+      }
+    const handleEdit = (e)=>{
         e.preventDefault();
-        const newTask = this.getTask.value;
         const data={
-            newTask
+            newtask
         }
-        this.props.dispatch({type:'UPDATE', id: this.props.task.id, data:data})
+        dispatch({type:'UPDATE', id: props.task.id, data:data});
     }
-    render(){
         return(
             <div>
-                <form onSubmit={this.handleEdit}>
-                   <input required type="text" ref={(input) => this.getTask = input}
-                    defaultValue={this.props.task.task} placeholder="Enter Task" />
+                <form onSubmit={handleEdit}>
+                   <input required type="text" onChange={handletaskInput}
+                    defaultValue={props.task.task} placeholder="Enter Task" />
                     <button>Update</button>
                 </form>
             </div>
         );
-    }
 }
-export default connect()(EditComponent);
+export default EditComponent;

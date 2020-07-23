@@ -1,4 +1,5 @@
-const taskReducer = (state =[], action)=>{
+
+const taskReducer = (state=[], action)=>{
     switch(action.type){
         case 'ADD_TASK':
             return state.concat([action.data]);
@@ -11,8 +12,8 @@ const taskReducer = (state =[], action)=>{
                 if(task.id === action.id){
                     return{
                         ...task,
-                        task:action.data.newTask,
-                        editing:!task.editing
+                        editing:!task.editing,
+                        task:action.data.newtask
                     }
                 }else return task;
             })

@@ -1,22 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import Task from './Task';
 import EditComponent from './EditComponent';
 
-class AllTask extends Component {
-  render() {
-    return (
+function AllTask(state){
+  return (
     <div>
       <h1>All Task</h1>
-      {this.props.tasks.map((task)=>(
+        {state.tasks.map((task)=>(
         <div key={task.id}>
           {task.editing?<EditComponent task={task} key={task.id}/>:<Task key={task.id} task={task}/>}
+          { console.log(task)}
         </div>
       ))}
     </div>
-    );
-   }
+  );
 }
+
+
 const mapStateToProps = (state)=>{
   return{
     tasks:state

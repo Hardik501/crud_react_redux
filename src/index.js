@@ -5,7 +5,14 @@ import App from './App';
 import {createStore} from 'redux';
 import taskReducer from './reducer/TaskReducer';
 import {Provider} from 'react-redux';
-const store = createStore(taskReducer);
+
+const persistedState = localStorage.getItem('reduxState') 
+                       ? JSON.parse(localStorage.getItem('reduxState'))
+                       : []
+let store = createStore(taskReducer, persistedState);
+store.subscribe(()=>{
+  localStorage.setItem('reduxState', JSON.stringify(store.getState()))
+})
 
 ReactDOM.render(
   <Provider store={store}>
